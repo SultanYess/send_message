@@ -1,4 +1,4 @@
-<h1>Инструкция
+<h3>Инструкция
 <ol>
     <li>python3 -m venv venv
     <li>  . venv/bin/activate
