@@ -1,3 +1,4 @@
+from django.conf import settings
 from django.db import models
 from django.dispatch import receiver
 from django.db.models.signals import post_save
@@ -17,30 +18,3 @@ class SendMessage(models.Model):
 
     def __str__(self):
         return self.last_name
-
-@receiver(post_save, sender=SendMessage)
-def send_message(sender, instance, created, **kwargs):
-    if created:
-            subject = "Новое письмо от "
-            message = (
-                       "Last Name: {}\n"
-                       "First Name: {}\n"
-                       "Middle Name: {}\n"
-                       "IIN or BIN: {}\n"
-                       "Email:{}\n"
-                       "Phone Number: {}\n"
-                       "Mail Address: {}\n"
-                       "Questions: {} \n").format(
-                    instance.last_name,
-                    instance.first_name,
-                    instance.middle_name,
-                    instance.iin_or_bin,
-                    instance.email,
-                    instance.phone_number,
-                    instance.mail_address,
-                    instance.questions,
-            )
-            from_email = "sultanesengeldinovv@gmail.com"
-            recipient_list = ["krivivativlad@gmail.com"]
-
-            send_mail(subject, message, from_email, recipient_list)

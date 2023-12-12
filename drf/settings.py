@@ -27,7 +27,6 @@ INSTALLED_APPS = [
     'rest_framework',
     'djoser',
     'rest_framework.authtoken',
-    'snippet',
     'send_email',
 ]
 
@@ -124,7 +123,12 @@ REST_FRAMEWORK = {
         'rest_framework_simplejwt.authentication.JWTAuthentication',
         # 'rest_framework.authentication.BasicAuthentication'
         'rest_framework.authentication.SessionAuthentication'
-    )
+    ),
+    'DEFAULT_RENDERER_CLASSES': (
+                'rest_framework.renderers.JSONRenderer',
+                'rest_framework.renderers.BrowsableAPIRenderer',
+    ),
+
 }
 
 EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
