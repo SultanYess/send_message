@@ -7,7 +7,8 @@ router = DefaultRouter()
 
 
 urlpatterns = [
-    path('', views.EmailCreateView.as_view(), name='create_message')
+    path('', views.EmailCreateView.as_view(), name='create_message'),
+    path(r'api/captcha/', include('rest_captcha.urls')),
 ]
 
 

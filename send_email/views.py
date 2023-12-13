@@ -1,5 +1,4 @@
 from rest_framework import generics
-from rest_framework.permissions import IsAuthenticatedOrReadOnly
 from .models import SendMessage
 from .seralizers import EmailSerializer
 from django.conf import settings
@@ -7,14 +6,14 @@ from django.dispatch import receiver
 from django.db.models.signals import post_save
 from django.core.mail import send_mail
 
+
 class EmailCreateView(generics.CreateAPIView):
     queryset = SendMessage.objects.all()
     serializer_class = EmailSerializer
-    permission_classes = [IsAuthenticatedOrReadOnly]
     @receiver(post_save, sender=SendMessage)
     def send_message(sender, instance, created, **kwargs):
         if created:
-                subject = "Новое письмо от "
+                subject = "Test"
                 message = (
                            "Last Name: {}\n"
                            "First Name: {}\n"

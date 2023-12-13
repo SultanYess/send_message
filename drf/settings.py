@@ -10,10 +10,11 @@ SECRET_KEY = 'django-insecure-e6!m_uyzfjpn9@o(mikqr=2ec=zsrw4(xr(74p=dh5t!w9-bjm
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
+CSRF_COOKIE_SECURE = True
+CSRF_TRUSTED_ORIGINS = ['https://d3e8-5-188-252-178.ngrok-free.app/']
 
 
-# Application definition
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -22,12 +23,13 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'rest_framework_simplejwt',
-    'django_filters',
     'rest_framework',
-    'djoser',
+    'rest_framework_api_key',
     'rest_framework.authtoken',
+    'rest_captcha',
     'send_email',
+    'corsheaders',
+
 ]
 
 MIDDLEWARE = [
@@ -94,7 +96,7 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/4.2/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'ru'
 
 TIME_ZONE = 'UTC'
 
@@ -116,6 +118,9 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
 REST_FRAMEWORK = {
+    # "DEFAULT_PERMISSION_CLASSES": [
+    #     "rest_framework_api_key.permissions.HasAPIKey",
+    # ],
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination',
     'PAGE_SIZE': 5,
     'DEFAULT_FILTER_BACKENDS': ['django_filters.rest_framework.DjangoFilterBackend'],
@@ -128,6 +133,10 @@ REST_FRAMEWORK = {
                 'rest_framework.renderers.JSONRenderer',
                 'rest_framework.renderers.BrowsableAPIRenderer',
     ),
+    'DEFAULT_PARSER_CLASSES': (
+        'rest_framework.parsers.JSONParser',
+    ),
+    'BASE_URL': 'https://272c-5-188-252-178.ngrok-free.app/api/',
 
 }
 
